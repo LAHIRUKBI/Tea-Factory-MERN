@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 // Signup method
 export const signup = async (req, res, next) => {
-  console.log("Signup request received with data:", req.body); // Log the incoming request
+  console.log("Signup request received with data:", req.body);
   const { email, password } = req.body;
 
   try {
@@ -17,10 +17,10 @@ export const signup = async (req, res, next) => {
     const newUser = new User({ email, password: hashedPassword });
 
     await newUser.save();
-    console.log("User created successfully!"); // Confirm user creation
+    console.log("User created successfully!");
     res.status(201).json({ success: true, message: 'User created successfully!' });
   } catch (error) {
-    console.error("Signup error:", error); // Log any signup errors
+    console.error("Signup error:", error);
     next(error);
   }
 };
