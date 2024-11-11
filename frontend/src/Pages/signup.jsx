@@ -20,21 +20,14 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    console.log('Submitting form with user data:', user); // Debugging line
-  
     try {
-      const response = await axios.post('/api/signup', {
-        fullName: user.fullName,
-        email: user.email,
-        password: user.password,
-      });
-      console.log('Response from API:', response.data); // Debugging line
+      const response = await axios.post('/api/signup', user);
       setMessage(response.data.message || 'Signup successful');
     } catch (error) {
-      console.error('Error during signup:', error); // Debugging line
       setMessage(error.response?.data?.message || 'Signup failed');
     }
   };
+  
   
 
   return (

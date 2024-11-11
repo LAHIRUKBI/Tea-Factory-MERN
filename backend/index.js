@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import cors from 'cors'; // Importing CORS
+import cors from 'cors';
 
 import signupRoute from './route/signup.route.js';
 
@@ -10,7 +10,7 @@ dotenv.config();
 mongoose
   .connect(process.env.MONGO)
   .then(() => {
-    console.log("Connected to Mongo DataBase");
+    console.log("Connected to MongoDB");
   })
   .catch((err) => {
     console.log(err);
@@ -19,21 +19,19 @@ mongoose
 const app = express();
 
 // Middleware
-app.use(cors()); // Enabling CORS for all routes
-app.use(express.json()); // Parses incoming JSON requests
+app.use(cors());
+app.use(express.json());
 
+// Routes
 app.use('/api/signup', signupRoute);
 
+// Error handler
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
-  return res.status(statusCode).json({
-    success: false,
-    statusCode,
-    message,
-  });
+  res.status(statusCode).json({ success: false, statusCode, message });
 });
 
 app.listen(3000, () => {
-  console.log('Server is running on port 3000!');
+  console.log('Server running on port 3000!');
 });

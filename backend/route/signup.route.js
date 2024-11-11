@@ -4,6 +4,6 @@ import { registerUser } from '../controller/signup.controller.js'; // Updated pa
 
 const router = express.Router();
 
-router.post('/signup', registerUser);
+router.post('/', registerUser);
 
 export default router;
