@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
 
-import signupRoute from './route/signup.route.js';
+import userRouter from "./route/signup.route.js";
 
 dotenv.config();
 
@@ -23,7 +23,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/signup', signupRoute);
+app.use("/api/signup", userRouter);
 
 // Error handler
 app.use((err, req, res, next) => {

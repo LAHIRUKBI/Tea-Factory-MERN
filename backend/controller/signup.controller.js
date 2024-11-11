@@ -1,28 +1,27 @@
 import User from '../model/signup.model.js';
 import bcrypt from 'bcrypt';
 
-export const registerUser = async (req, res) => {
-  const { fullName, email, password } = req.body;
+
+// Signup method
+export const signup = async (req, res, next) => {
+  console.log("Signup request received with data:", req.body); // Log the incoming request
+  const { email, password } = req.body;
 
   try {
-    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: 'Email already in use, please choose a different one.' });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Save new user with hashed password
-    const newUser = new User({ fullName, email, password: hashedPassword });
+    const newUser = new User({ email, password: hashedPassword });
 
     await newUser.save();
-    console.log("New user registered:", newUser);
-
-    res.status(201).json({ message: 'User registered successfully' });
+    console.log("User created successfully!"); // Confirm user creation
+    res.status(201).json({ success: true, message: 'User created successfully!' });
   } catch (error) {
-    console.error("Error during registration:", error.message);
-    res.status(500).json({ message: 'Error registering user, please try again later' });
+    console.error("Signup error:", error); // Log any signup errors
+    next(error);
   }
 };
+
