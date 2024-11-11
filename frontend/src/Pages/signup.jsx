@@ -21,15 +21,16 @@ export default function Signup() {
     e.preventDefault();
   
     try {
-      const response = await axios.post('/api/signup', user);
+      // Replace 'http://localhost:3000' with your backend server URL
+      const response = await axios.post('http://localhost:3000/api/signup', user);
       setMessage(response.data.message || 'Signup successful');
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Signup failed');
+      console.error("Signup error:", error); // Log error for debugging
+      setMessage(error.response?.data?.message || 'Signup failed. Please check your details and try again.');
     }
   };
   
   
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
