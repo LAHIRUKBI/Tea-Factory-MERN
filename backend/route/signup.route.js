@@ -1,9 +1,9 @@
 // signup.route.js
 import express from 'express';
-import { registerUser } from '../controller/signup.controller.js'; // Updated path
+import { signup } from '../controller/signup.controller.js'; // Updated path
 
 const router = express.Router();
 
-router.post('/', registerUser);
+router.post("/signup", signup);
 
 export default router;
