@@ -25,7 +25,7 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         setLoading(true);
-        const res = await fetch("/api/signup", {
+        const res = await fetch("http://localhost:3000/api/signup", { // Updated URL
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -49,6 +49,7 @@ const handleSubmit = async (e) => {
         setError("An unexpected error occurred. Please try again.");
     }
 };
+
 
 return (
     <div className="flex flex-col min-h-screen justify-between">
