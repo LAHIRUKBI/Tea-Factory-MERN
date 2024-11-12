@@ -25,7 +25,7 @@ const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         setLoading(true);
-        const res = await fetch("http://localhost:3000/api/signup", { // Updated URL
+        const res = await fetch("http://localhost:3000/api/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,7 +40,7 @@ const handleSubmit = async (e) => {
             return;
         }
 
-        // Navigate to signin page on successful signup
+        
         setError(null);
         navigate("/signin");
     } catch (error) {
@@ -112,7 +112,7 @@ return (
 
                 {/* Right Side: Image Section */}
                 <div className="w-12dp p-4">
-                    <img src="src/images/signup.jpeg" alt="Signup" className="w-full h-auto rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105" />
+                    <img src="src/images/tea.png" alt="Signup" className="w-full h-auto rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105" />
                 </div>
             </div>
         </div>
