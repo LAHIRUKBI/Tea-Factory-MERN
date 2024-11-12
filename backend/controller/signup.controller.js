@@ -25,3 +25,29 @@ export const signup = async (req, res, next) => {
   }
 };
 
+
+
+
+
+// Signin function
+export const signin = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ message: 'Invalid email or password.' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid email or password.' });
+    }
+
+    console.log("User signed in successfully!");
+    res.status(200).json({ success: true, message: 'Signed in successfully!' });
+  } catch (error) {
+    console.error("Signin error:", error);
+    next(error);
+  }
+};
