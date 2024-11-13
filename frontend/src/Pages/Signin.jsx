@@ -34,7 +34,7 @@ export default function Signin() {
       }
 
       setError(null);
-      navigate("/home");  // Navigate to the home page or dashboard
+      navigate("/");  // Navigate to the home page or dashboard
     } catch (error) {
       console.error("Error:", error.message);
       setLoading(false);
@@ -43,19 +43,19 @@ export default function Signin() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen justify-center items-center bg-white">
-      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-3xl font-extrabold text-center mb-4 text-green-600">Sign In</h2>
+    <div className="flex flex-col min-h-screen justify-center items-center bg-gray-100">
+      <div className="w-full max-w-md bg-white border border-gray-300 shadow-lg rounded-lg p-8">
+        <h2 className="text-3xl font-extrabold text-center mb-6 text-green-600">Sign In</h2>
         <form onSubmit={handleSubmit}>
           {error && <div className="text-red-500 text-sm mb-4">{error}</div>}
-          
+
           <div className="mb-5">
             <label className="block text-sm font-medium text-green-600" htmlFor="email">Email:</label>
             <input
               type="email"
               id="email"
               placeholder="Email"
-              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 sm:text-sm"
+              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 sm:text-sm"
               onChange={handleChange}
               required
             />
@@ -67,7 +67,7 @@ export default function Signin() {
               type="password"
               id="password"
               placeholder="Password"
-              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 sm:text-sm"
+              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 sm:text-sm"
               onChange={handleChange}
               required
             />
