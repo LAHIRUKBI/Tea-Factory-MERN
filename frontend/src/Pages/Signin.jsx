@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope, faLock, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export default function Signin() {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -51,26 +53,32 @@ export default function Signin() {
 
           <div className="mb-5">
             <label className="block text-sm font-medium text-green-600" htmlFor="email">Email:</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="Email"
-              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 sm:text-sm"
-              onChange={handleChange}
-              required
-            />
+            <div className="relative">
+              <input
+                type="email"
+                id="email"
+                placeholder="Email"
+                className="mt-1 block w-full px-10 py-3 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 sm:text-sm"
+                onChange={handleChange}
+                required
+              />
+              <FontAwesomeIcon icon={faEnvelope} className="absolute left-3 top-3 text-gray-500" />
+            </div>
           </div>
 
           <div className="mb-5">
             <label className="block text-sm font-medium text-green-600" htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 sm:text-sm"
-              onChange={handleChange}
-              required
-            />
+            <div className="relative">
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                className="mt-1 block w-full px-10 py-3 border border-gray-300 rounded-md shadow-sm bg-gray-50 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-400 focus:border-green-400 sm:text-sm"
+                onChange={handleChange}
+                required
+              />
+              <FontAwesomeIcon icon={faLock} className="absolute left-3 top-3 text-gray-500" />
+            </div>
           </div>
 
           <button
@@ -78,7 +86,12 @@ export default function Signin() {
             className={`w-full bg-gradient-to-r from-green-600 to-green-500 text-white py-3 px-4 rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 shadow-md ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             disabled={loading}
           >
-            {loading ? 'Signing In...' : 'Sign In'}
+            {loading ? (
+              <>
+                <FontAwesomeIcon icon={faSpinner} spin className="mr-2" />
+                Signing In...
+              </>
+            ) : 'Sign In'}
           </button>
         </form>
       </div>
