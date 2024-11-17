@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import userRouter from "./route/signup.route.js";
+import employeeRouter from './route/employee.route.js';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/signup", userRouter);
+app.use('/api/employees', employeeRouter);
 
 // Error handler
 app.use((err, req, res, next) => {
