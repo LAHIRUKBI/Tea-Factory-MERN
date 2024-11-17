@@ -27,106 +27,115 @@ export default function Employee_register() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 py-8">
-      <form className="bg-white shadow-md rounded-lg p-8 max-w-lg w-full">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-8">
+      <form className="bg-white shadow-md rounded-lg p-8 max-w-4xl w-full">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Register Employee</h1>
-        {/* Section Field */}
-        <div className="mb-6">
-          <label htmlFor="section" className="block text-sm font-medium text-gray-700 mb-2">
-            Section
-          </label>
-          <select
-            id="section"
-            name="section"
-            className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onChange={handleChange}
-          >
-            <option value="">Select Section</option>
-            <option value="HR">HR</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Sales">Sales</option>
-            <option value="Support">Support</option>
-          </select>
-        </div>
-        <div className="mb-6">
-          <label htmlFor="companyNumber" className="block text-sm font-medium text-gray-700 mb-2">
-            Company Number
-          </label>
-          <input
-            type="text"
-            id="companyNumber"
-            name="companyNumber"
-            placeholder="Enter company number"
-            className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-6">
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter name"
-            className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-6">
-          <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
-            Address
-          </label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            placeholder="Enter address"
-            className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-6">
-          <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-2">
-            Gender
-          </label>
-          <select
-            id="gender"
-            name="gender"
-            className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onChange={handleChange}
-          >
-            <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div className="mb-6">
-          <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
-            Phone Number
-          </label>
-          <input
-            type="text"
-            id="phoneNumber"
-            name="phoneNumber"
-            placeholder="Enter phone number"
-            className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-6">
-          <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-2">
-            Date of Birth
-          </label>
-          <input
-            type="date"
-            id="dateOfBirth"
-            name="dateOfBirth"
-            className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onChange={handleChange}
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Left Section */}
+          <div>
+            {/* Section Field */}
+            <div className="mb-6">
+              <label htmlFor="section" className="block text-sm font-medium text-gray-700 mb-2">
+                Section
+              </label>
+              <select
+                id="section"
+                name="section"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                onChange={handleChange}
+              >
+                <option value="">Select Section</option>
+                <option value="HR">HR</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Sales">Sales</option>
+                <option value="Support">Support</option>
+              </select>
+            </div>
+            <div className="mb-6">
+              <label htmlFor="companyNumber" className="block text-sm font-medium text-gray-700 mb-2">
+                Company Number
+              </label>
+              <input
+                type="text"
+                id="companyNumber"
+                name="companyNumber"
+                placeholder="Enter company number"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter name"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
+                Address
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                placeholder="Enter address"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          {/* Right Section */}
+          <div>
+            <div className="mb-6">
+              <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-2">
+                Gender
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                onChange={handleChange}
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div className="mb-6">
+              <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-2">
+                Phone Number
+              </label>
+              <input
+                type="text"
+                id="phoneNumber"
+                name="phoneNumber"
+                placeholder="Enter phone number"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-6">
+              <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-2">
+                Date of Birth
+              </label>
+              <input
+                type="date"
+                id="dateOfBirth"
+                name="dateOfBirth"
+                className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
         </div>
         <button
           type="submit"
