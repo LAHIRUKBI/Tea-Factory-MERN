@@ -19,3 +19,16 @@ export const registerEmployee = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error', error: error.message });
   }
 };
+
+
+
+
+// Get all employees
+export const getAllEmployees = async (req, res) => {
+  try {
+    const employees = await Employee.find(); // Retrieve all employees
+    res.status(200).json({ success: true, data: employees });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error', error: error.message });
+  }
+};

@@ -9,6 +9,7 @@ import Employee_register from './Pages/Employee_register'
 import Staff_registration from './Pages/Staff_registration'
 import Stockmanager_register from './Pages/Stockmanager_register'
 import Vehicles_register from './Pages/Vehicles_register'
+import Employee_view from './Pages/Employee_view'
 
 export default function App() {
   return (
@@ -24,6 +25,9 @@ export default function App() {
       <Route path="/staffregister" element={<Staff_registration />} />
       <Route path="/stockmanagerregister" element={<Stockmanager_register />} />
       <Route path="/vehiclesregister" element={<Vehicles_register />} />
+      <Route path="/employeeview" element={<Employee_view />} />
+
+      
     </Routes>
     </BrowserRouter>
     
