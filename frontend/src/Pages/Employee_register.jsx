@@ -36,7 +36,7 @@ export default function Employee_register() {
             {/* Section Field */}
             <div className="mb-6">
               <label htmlFor="section" className="block text-sm font-medium text-gray-700 mb-2">
-                Section
+                Section branch
               </label>
               <select
                 id="section"
@@ -45,21 +45,22 @@ export default function Employee_register() {
                 onChange={handleChange}
               >
                 <option value="">Select Section</option>
-                <option value="HR">HR</option>
-                <option value="Engineering">Engineering</option>
-                <option value="Sales">Sales</option>
-                <option value="Support">Support</option>
+                <option value="Employee">Employee</option>
+                <option value="Staff Manager">Staff Manager</option>
+                <option value="Stock Manager">Stock Manager</option>
+                <option value="vehicle Manager">Vehicle Manager</option>
+                <option value="Delivery Manager">Delivery Manager</option>
               </select>
             </div>
             <div className="mb-6">
               <label htmlFor="companyNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                Company Number
+                Company ID
               </label>
               <input
                 type="text"
                 id="companyNumber"
                 name="companyNumber"
-                placeholder="Enter company number"
+                placeholder="Enter company ID"
                 className="w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
                 onChange={handleChange}
               />
