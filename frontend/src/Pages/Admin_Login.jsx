@@ -44,167 +44,119 @@ export default function Admin_Login() {
       setCompanyError('Invalid company credentials. Please try again.');
     }
   };
-  
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        height: '100vh',
-        backgroundColor: '#f5f5f5',
-      }}
-    >
-      {/* Admin Login Form */}
-      <div
-        style={{
-          width: '400px',
-          padding: '20px',
-          background: '#fff',
-          borderRadius: '8px',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        }}
-      >
-        <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Admin Login</h2>
-        {error && <div style={{ color: 'red', marginBottom: '10px' }}>{error}</div>}
-        <form onSubmit={handleAdminLogin}>
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="adminName" style={{ display: 'block', marginBottom: '5px' }}>
-              Name:
-            </label>
-            <input
-              type="text"
-              id="adminName"
-              value={adminCredentials.name}
-              onChange={(e) => setAdminCredentials({ ...adminCredentials, name: e.target.value })}
-              style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-            />
-          </div>
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="institutionID" style={{ display: 'block', marginBottom: '5px' }}>
-              Institution ID:
-            </label>
-            <input
-              type="text"
-              id="institutionID"
-              value={adminCredentials.institutionID}
-              onChange={(e) => setAdminCredentials({ ...adminCredentials, institutionID: e.target.value })}
-              style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-            />
-          </div>
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="nic" style={{ display: 'block', marginBottom: '5px' }}>
-              NIC Number:
-            </label>
-            <input
-              type="text"
-              id="nic"
-              value={adminCredentials.nic}
-              onChange={(e) => setAdminCredentials({ ...adminCredentials, nic: e.target.value })}
-              style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-            />
-          </div>
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              padding: '10px',
-              backgroundColor: '#007bff',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-          >
-            Admin Login
-          </button>
-        </form>
-      </div>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      {/* Login Container */}
+      <div className="flex space-x-8 w-full max-w-6xl">
+        
+        {/* Admin Login Form */}
+        <div className="w-full max-w-xs p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <h2 className="text-2xl text-center font-semibold mb-6 text-blue-600">administrator Login</h2>
+          {error && <div className="text-red-500 mb-4">{error}</div>}
+          <form onSubmit={handleAdminLogin}>
+            <div className="mb-4">
+              <label htmlFor="adminName" className="block text-sm font-medium mb-2">
+                Name:
+              </label>
+              <input
+                type="text"
+                id="adminName"
+                value={adminCredentials.name}
+                onChange={(e) => setAdminCredentials({ ...adminCredentials, name: e.target.value })}
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="institutionID" className="block text-sm font-medium mb-2">
+                Institution ID:
+              </label>
+              <input
+                type="text"
+                id="institutionID"
+                value={adminCredentials.institutionID}
+                onChange={(e) => setAdminCredentials({ ...adminCredentials, institutionID: e.target.value })}
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="nic" className="block text-sm font-medium mb-2">
+                NIC Number:
+              </label>
+              <input
+                type="text"
+                id="nic"
+                value={adminCredentials.nic}
+                onChange={(e) => setAdminCredentials({ ...adminCredentials, nic: e.target.value })}
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none"
+            >
+              Admin Login
+            </button>
+          </form>
+        </div>
 
-      {/* Company Login Form */}
-      <div
-  style={{
-    width: '400px',
-    padding: '20px',
-    background: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-  }}
->
-  <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Company Login</h2>
-  {companyError && <div style={{ color: 'red', marginBottom: '10px' }}>{companyError}</div>}
-  <form onSubmit={handleCompanyLogin}>
-    <div style={{ marginBottom: '15px' }}>
-      <label htmlFor="companyNumber" style={{ display: 'block', marginBottom: '5px' }}>
-        Company Number:
-      </label>
-      <input
-        type="text"
-        id="companyNumber"
-        value={companyCredentials.companyNumber}
-        onChange={(e) =>
-          setCompanyCredentials({ ...companyCredentials, companyNumber: e.target.value })
-        }
-        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-      />
-    </div>
-    <div style={{ marginBottom: '15px' }}>
-      <label htmlFor="companyName" style={{ display: 'block', marginBottom: '5px' }}>
-        Name:
-      </label>
-      <input
-        type="text"
-        id="companyName"
-        value={companyCredentials.name}
-        onChange={(e) =>
-          setCompanyCredentials({ ...companyCredentials, name: e.target.value })
-        }
-        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-      />
-    </div>
-    <div style={{ marginBottom: '15px' }}>
-      <label htmlFor="section" style={{ display: 'block', marginBottom: '5px' }}>
-        Section:
-      </label>
-      <select
-        id="section"
-        value={companyCredentials.section || ''}
-        onChange={(e) =>
-          setCompanyCredentials({ ...companyCredentials, section: e.target.value })
-        }
-        style={{
-          width: '100%',
-          padding: '10px',
-          borderRadius: '4px',
-          border: '1px solid #ccc',
-        }}
-      >
-        <option value="">Select Section</option>
+        {/* Company Login Form */}
+        <div className="w-full max-w-xs p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <h2 className="text-2xl text-center font-semibold mb-6 text-green-600">Staff Login</h2>
+          {companyError && <div className="text-red-500 mb-4">{companyError}</div>}
+          <form onSubmit={handleCompanyLogin}>
+            <div className="mb-4">
+              <label htmlFor="companyNumber" className="block text-sm font-medium mb-2">
+                Company Number:
+              </label>
+              <input
+                type="text"
+                id="companyNumber"
+                value={companyCredentials.companyNumber}
+                onChange={(e) => setCompanyCredentials({ ...companyCredentials, companyNumber: e.target.value })}
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="companyName" className="block text-sm font-medium mb-2">
+                Name:
+              </label>
+              <input
+                type="text"
+                id="companyName"
+                value={companyCredentials.name}
+                onChange={(e) => setCompanyCredentials({ ...companyCredentials, name: e.target.value })}
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="section" className="block text-sm font-medium mb-2">
+                Section:
+              </label>
+              <select
+                id="section"
+                value={companyCredentials.section || ''}
+                onChange={(e) => setCompanyCredentials({ ...companyCredentials, section: e.target.value })}
+                className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                <option value="">Select Section</option>
                 <option value="Employee">Employee</option>
                 <option value="Staff Manager">Staff Manager</option>
                 <option value="Stock Manager">Stock Manager</option>
-                <option value="vehicle Manager">Vehicle Manager</option>
+                <option value="Vehicle Manager">Vehicle Manager</option>
                 <option value="Delivery Manager">Delivery Manager</option>
-      </select>
-    </div>
-    <button
-      type="submit"
-      style={{
-        width: '100%',
-        padding: '10px',
-        backgroundColor: '#28a745',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '4px',
-        cursor: 'pointer',
-      }}
-    >
-      Company Login
-    </button>
-  </form>
-</div>
+              </select>
+            </div>
+            <button
+              type="submit"
+              className="w-full p-3 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none"
+            >
+              Company Login
+            </button>
+          </form>
+        </div>
 
+      </div>
     </div>
   );
 }
