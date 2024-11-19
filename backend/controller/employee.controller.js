@@ -61,30 +61,42 @@ export const deleteEmployee = async (req, res) => {
 
 
 
-
 // Company Login Controller
 export const companyLogin = async (req, res) => {
-  const { companyNumber, name } = req.body;
+  const { companyNumber, name, section } = req.body;
 
   try {
-    // Validate input
-    if (!companyNumber || !name) {
-      return res.status(400).json({ success: false, message: 'Both company number and name are required' });
+    if (!companyNumber || !name || !section) {
+      return res.status(400).json({
+        success: false,
+        message: 'Company number, name, and section are required',
+      });
     }
 
-    // Find the employee with matching credentials
-    const employee = await Employee.findOne({ companyNumber, name });
+    // Log the values received from the frontend for debugging
+    console.log('Login attempt with:', companyNumber, name, section);
+
+    // Query the employee database for matching credentials
+    const employee = await Employee.findOne({ companyNumber, name, section });
+
+    // Log the employee object to check if it exists
+    console.log('Found employee:', employee);
 
     if (!employee) {
-      return res.status(404).json({ success: false, message: 'Invalid credentials' });
+      return res.status(404).json({
+        success: false,
+        message: 'Invalid credentials or incorrect section',
+      });
     }
 
+    // Respond with success
     res.status(200).json({
       success: true,
       message: 'Login successful',
       employee,
     });
   } catch (error) {
+    console.error('Error in companyLogin:', error);
     res.status(500).json({
       success: false,
       message: 'Server error',
@@ -92,3 +104,4 @@ export const companyLogin = async (req, res) => {
     });
   }
 };
+

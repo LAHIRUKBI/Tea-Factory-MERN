@@ -12,6 +12,7 @@ export default function Admin_Login() {
   const [companyCredentials, setCompanyCredentials] = useState({
     companyNumber: '',
     name: '',
+    section: '',
   });
   const [companyError, setCompanyError] = useState('');
   const navigate = useNavigate();
@@ -30,13 +31,20 @@ export default function Admin_Login() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3000/api/employees/login', companyCredentials);
+      console.log('Response from company login:', response.data); // Add this for debugging
+  
       if (response.data.success) {
+        // If login is successful, navigate to the home page or another page
         navigate('/'); // Adjust navigation based on your routes
+      } else {
+        setCompanyError(response.data.message); // Use the message returned from the backend
       }
     } catch (err) {
+      console.error('Error during login:', err);
       setCompanyError('Invalid company credentials. Please try again.');
     }
   };
+  
 
   return (
     <div
@@ -116,61 +124,87 @@ export default function Admin_Login() {
 
       {/* Company Login Form */}
       <div
+  style={{
+    width: '400px',
+    padding: '20px',
+    background: '#fff',
+    borderRadius: '8px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  }}
+>
+  <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Company Login</h2>
+  {companyError && <div style={{ color: 'red', marginBottom: '10px' }}>{companyError}</div>}
+  <form onSubmit={handleCompanyLogin}>
+    <div style={{ marginBottom: '15px' }}>
+      <label htmlFor="companyNumber" style={{ display: 'block', marginBottom: '5px' }}>
+        Company Number:
+      </label>
+      <input
+        type="text"
+        id="companyNumber"
+        value={companyCredentials.companyNumber}
+        onChange={(e) =>
+          setCompanyCredentials({ ...companyCredentials, companyNumber: e.target.value })
+        }
+        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
+      />
+    </div>
+    <div style={{ marginBottom: '15px' }}>
+      <label htmlFor="companyName" style={{ display: 'block', marginBottom: '5px' }}>
+        Name:
+      </label>
+      <input
+        type="text"
+        id="companyName"
+        value={companyCredentials.name}
+        onChange={(e) =>
+          setCompanyCredentials({ ...companyCredentials, name: e.target.value })
+        }
+        style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
+      />
+    </div>
+    <div style={{ marginBottom: '15px' }}>
+      <label htmlFor="section" style={{ display: 'block', marginBottom: '5px' }}>
+        Section:
+      </label>
+      <select
+        id="section"
+        value={companyCredentials.section || ''}
+        onChange={(e) =>
+          setCompanyCredentials({ ...companyCredentials, section: e.target.value })
+        }
         style={{
-          width: '400px',
-          padding: '20px',
-          background: '#fff',
-          borderRadius: '8px',
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          width: '100%',
+          padding: '10px',
+          borderRadius: '4px',
+          border: '1px solid #ccc',
         }}
       >
-        <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Company Login</h2>
-        {companyError && <div style={{ color: 'red', marginBottom: '10px' }}>{companyError}</div>}
-        <form onSubmit={handleCompanyLogin}>
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="companyNumber" style={{ display: 'block', marginBottom: '5px' }}>
-              Company Number:
-            </label>
-            <input
-              type="text"
-              id="companyNumber"
-              value={companyCredentials.companyNumber}
-              onChange={(e) =>
-                setCompanyCredentials({ ...companyCredentials, companyNumber: e.target.value })
-              }
-              style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-            />
-          </div>
-          <div style={{ marginBottom: '15px' }}>
-            <label htmlFor="companyName" style={{ display: 'block', marginBottom: '5px' }}>
-              Name:
-            </label>
-            <input
-              type="text"
-              id="companyName"
-              value={companyCredentials.name}
-              onChange={(e) =>
-                setCompanyCredentials({ ...companyCredentials, name: e.target.value })
-              }
-              style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-            />
-          </div>
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              padding: '10px',
-              backgroundColor: '#28a745',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-          >
-            Company Login
-          </button>
-        </form>
-      </div>
+        <option value="">Select Section</option>
+                <option value="Employee">Employee</option>
+                <option value="Staff Manager">Staff Manager</option>
+                <option value="Stock Manager">Stock Manager</option>
+                <option value="vehicle Manager">Vehicle Manager</option>
+                <option value="Delivery Manager">Delivery Manager</option>
+      </select>
+    </div>
+    <button
+      type="submit"
+      style={{
+        width: '100%',
+        padding: '10px',
+        backgroundColor: '#28a745',
+        color: '#fff',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer',
+      }}
+    >
+      Company Login
+    </button>
+  </form>
+</div>
+
     </div>
   );
 }
