@@ -6,7 +6,6 @@ import Navigation from './Components/Navigation'
 import Admin_Login from './Pages/Admin_Login'
 import Admin_Home from './Pages/Admin_Home'
 import Employee_register from './Pages/Employee_register'
-import Staff_registration from './Pages/Staff_registration'
 import Stockmanager_register from './Pages/Stockmanager_register'
 import Vehicles_register from './Pages/Vehicles_register'
 import Employee_view from './Pages/Employee_view'
@@ -22,7 +21,7 @@ export default function App() {
       <Route path="/admin" element={<Admin_Login />} />
       <Route path="/adminhome" element={<Admin_Home />} />
       <Route path="/employeeregister" element={<Employee_register />} />
-      <Route path="/staffregister" element={<Staff_registration />} />
+      
       <Route path="/stockmanagerregister" element={<Stockmanager_register />} />
       <Route path="/vehiclesregister" element={<Vehicles_register />} />
       <Route path="/employeeview" element={<Employee_view />} />
