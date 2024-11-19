@@ -58,3 +58,37 @@ export const deleteEmployee = async (req, res) => {
   }
 };
 
+
+
+
+
+// Company Login Controller
+export const companyLogin = async (req, res) => {
+  const { companyNumber, name } = req.body;
+
+  try {
+    // Validate input
+    if (!companyNumber || !name) {
+      return res.status(400).json({ success: false, message: 'Both company number and name are required' });
+    }
+
+    // Find the employee with matching credentials
+    const employee = await Employee.findOne({ companyNumber, name });
+
+    if (!employee) {
+      return res.status(404).json({ success: false, message: 'Invalid credentials' });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      employee,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+      error: error.message,
+    });
+  }
+};
