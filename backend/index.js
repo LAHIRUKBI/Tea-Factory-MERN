@@ -23,9 +23,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
+// Routes path
 app.use("/api/signup", userRouter);
 app.use('/api/employees', employeeRouter);
+
 
 // Error handler
 app.use((err, req, res, next) => {
