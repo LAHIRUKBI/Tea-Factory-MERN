@@ -31,19 +31,39 @@ export default function Admin_Login() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3000/api/employees/login', companyCredentials);
-      console.log('Response from company login:', response.data); // Add this for debugging
   
       if (response.data.success) {
-        // If login is successful, navigate to the home page or another page
-        navigate('/'); // Adjust navigation based on your routes
+        const { section } = companyCredentials;
+  
+        // Redirect based on the section selected
+        switch (section) {
+          case 'Employee':
+            navigate('/employeehome');
+            break;
+          case 'Staff Manager':
+            navigate('/staffmanagerhome');
+            break;
+          case 'Stock Manager':
+            navigate('/stockmanagerhome');
+            break;
+          case 'Vehicle Manager':
+            navigate('/vehiclemanagerhome');
+            break;
+          case 'Delivery Manager':
+            navigate('/deliverymanagerhome');
+            break;
+          default:
+            setCompanyError('Invalid section selected.');
+        }
       } else {
-        setCompanyError(response.data.message); // Use the message returned from the backend
+        setCompanyError(response.data.message || 'Invalid credentials. Please try again.');
       }
     } catch (err) {
-      console.error('Error during login:', err);
-      setCompanyError('Invalid company credentials. Please try again.');
+      console.error('Error during company login:', err);
+      setCompanyError('An error occurred during login. Please try again.');
     }
   };
+  
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
