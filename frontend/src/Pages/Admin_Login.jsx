@@ -48,11 +48,10 @@ export default function Admin_Login() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       {/* Login Container */}
-      <div className="flex space-x-8 w-full max-w-6xl">
-        
+      <div className="flex space-x-8 w-full max-w-6xl justify-center">
         {/* Admin Login Form */}
         <div className="w-full max-w-xs p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-          <h2 className="text-2xl text-center font-semibold mb-6 text-blue-600">administrator Login</h2>
+          <h2 className="text-2xl text-center font-semibold mb-6 text-blue-600">Administrator Login</h2>
           {error && <div className="text-red-500 mb-4">{error}</div>}
           <form onSubmit={handleAdminLogin}>
             <div className="mb-4">
@@ -99,7 +98,7 @@ export default function Admin_Login() {
             </button>
           </form>
         </div>
-
+  
         {/* Company Login Form */}
         <div className="w-full max-w-xs p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
           <h2 className="text-2xl text-center font-semibold mb-6 text-green-600">Staff Login</h2>
@@ -155,8 +154,8 @@ export default function Admin_Login() {
             </button>
           </form>
         </div>
-
       </div>
     </div>
   );
+  
 }
