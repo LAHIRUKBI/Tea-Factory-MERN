@@ -10,6 +10,10 @@ import Stockmanager_register from './Pages/Stockmanager_register'
 import Vehicles_register from './Pages/Vehicles_register'
 import Employee_view from './Pages/Employee_view'
 import Stockmanager_home from './Pages/Stockmanager_home'
+import Employee_home from './Pages/Employee_home'
+import Staffmanager_home from './Pages/Staffmanager_home'
+import Vehiclemanager_home from './Pages/Vehiclemanager_home'
+import Deliverymanager_home from './Pages/Deliverymanager_home'
 
 export default function App() {
   return (
@@ -27,6 +31,10 @@ export default function App() {
       <Route path="/vehiclesregister" element={<Vehicles_register />} />
       <Route path="/employeeview" element={<Employee_view />} />
       <Route path="/stockmanagerhome" element={<Stockmanager_home />} />
+      <Route path="/employeehome" element={<Employee_home />} />
+      <Route path="/staffmanagerhome" element={<Staffmanager_home />} />
+      <Route path="/vehiclemanagerhome" element={<Vehiclemanager_home />} />
+      <Route path="/deliverymanagerhome" element={<Deliverymanager_home />} />
 
       
     </Routes>
