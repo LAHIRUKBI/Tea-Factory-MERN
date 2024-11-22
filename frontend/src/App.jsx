@@ -42,7 +42,7 @@ export default function App() {
       <Route path="/addproduct" element={<Add_product />} />
       <Route path="/addstock" element={<Add_stocks />} />
       <Route path="/productview" element={<View_product />} />
-      <Route path="/updateproduct" element={<Product_update />} />
+      <Route path="/updateproduct/:id" element={<Product_update />} />
 
       
     </Routes>
