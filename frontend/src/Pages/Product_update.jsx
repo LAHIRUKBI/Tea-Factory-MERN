@@ -1,30 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function Product_update({ onUpdate }) {
-  const { id } = useParams(); // Get the product ID from the URL
-  const navigate = useNavigate(); // For navigation after the update
+export default function Product_update() {
+  const { id } = useParams(); // Retrieve the product ID from the URL parameters
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    mainCategory: '',
-    type: '',
-    price: '',
-    weight: '',
-    introduction: '',
+    mainCategory: "",
+    type: "",
+    price: "",
+    weight: "",
+    introduction: "",
   });
 
+  const [error, setError] = useState("");
+
+  // Fetch product data when the component mounts or when the id changes
   useEffect(() => {
-    // Fetch product data when the component mounts
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/products/${id}`);
-        setFormData(response.data.product); // Set the fetched product data in state
+        if (response.data?.product) {
+          setFormData(response.data.product); // Populate form with data
+        } else {
+          throw new Error("Product data not found");
+        }
       } catch (error) {
-        console.error('Error fetching product', error);
+        setError(error.response?.data?.message || "Error fetching product details");
       }
     };
 
-    fetchProduct();
+    if (id) {
+      fetchProduct(); // Fetch product details using the ID from the URL
+    }
   }, [id]);
 
   const handleChange = (e) => {
@@ -35,75 +43,38 @@ export default function Product_update({ onUpdate }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:3000/api/products/${id}`, formData);
-      if (onUpdate) {
-        onUpdate(response.data.product); // Update the product in the parent component
-      }
-      navigate('/productview'); // Navigate back to the product list
+      await axios.put(`http://localhost:3000/api/products/${id}`, formData);
+      navigate("/productview"); // Redirect to the product view page after updating
     } catch (error) {
-      console.error('Error updating product', error);
+      setError(error.response?.data?.message || "Error updating product");
     }
   };
 
   return (
     <div className="container mx-auto px-4 py-16">
-      <h2 className="text-4xl font-bold text-center text-teal-600 mb-12">Update Product</h2>
+      <h2 className="text-4xl font-bold text-center text-teal-600 mb-12">
+        Update Product
+      </h2>
+      {error && <p className="text-red-500 text-center">{error}</p>}
       <form onSubmit={handleSubmit}>
-        {/* Form Fields */}
-        <div className="mb-4">
-          <label htmlFor="mainCategory" className="block text-sm font-semibold text-gray-700">Main Category</label>
-          <input
-            type="text"
-            id="mainCategory"
-            name="mainCategory"
-            value={formData.mainCategory}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="type" className="block text-sm font-semibold text-gray-700">Type</label>
-          <input
-            type="text"
-            id="type"
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="price" className="block text-sm font-semibold text-gray-700">Price</label>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            value={formData.price}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="weight" className="block text-sm font-semibold text-gray-700">Weight</label>
-          <input
-            type="number"
-            id="weight"
-            name="weight"
-            value={formData.weight}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="introduction" className="block text-sm font-semibold text-gray-700">Introduction</label>
-          <textarea
-            id="introduction"
-            name="introduction"
-            value={formData.introduction}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded-lg"
-          />
-        </div>
+        {["mainCategory", "type", "price", "weight", "introduction"].map((field) => (
+          <div key={field} className="mb-4">
+            <label
+              htmlFor={field}
+              className="block text-sm font-semibold text-gray-700"
+            >
+              {field.charAt(0).toUpperCase() + field.slice(1)}
+            </label>
+            <input
+              type={field === "price" || field === "weight" ? "number" : "text"}
+              id={field}
+              name={field}
+              value={formData[field]} // Bind input value to form data
+              onChange={handleChange}
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+        ))}
         <button
           type="submit"
           className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-6 rounded-lg font-semibold"
