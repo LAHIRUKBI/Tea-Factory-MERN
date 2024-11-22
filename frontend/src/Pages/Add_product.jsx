@@ -3,20 +3,30 @@ import axios from 'axios';
 
 export default function Add_product() {
   const [formData, setFormData] = useState({
+    mainCategory: '',
     type: '',
     price: '',
     weight: '',
     introduction: '',
   });
 
-  const teaTypes = [
-    "Green Tea", "Black Tea", "White Tea", "Oolong Tea", "Pu-erh Tea",
-    "Chamomile Tea", "Peppermint Tea", "Rooibos Tea (Red Tea)", "Hibiscus Tea", "Lemongrass Tea",
-    "Darjeeling Tea", "Assam Tea", "Matcha (Japanese Green Tea)", "Sencha (Traditional Japanese Tea)", "Ceylon Tea",
-    "Earl Grey (Black Tea with Bergamot)", "Masala Chai", "Jasmine Green Tea", "Vanilla Rooibos", "Spiced Apple Tea",
-    "Genmaicha (Green Tea with Roasted Rice)", "Detox Tea (Blends of Green and Herbal Teas)", "Blue Pea Tea (Butterfly Pea Flower)",
-    "Turmeric Tea", "Yerba Mate"
-  ];
+  const teaCategories = {
+    "Traditional Tea Types": [
+      "Green Tea", "Black Tea", "White Tea", "Oolong Tea", "Pu-erh Tea",
+    ],
+    "Herbal and Infused Variants": [
+      "Chamomile Tea", "Peppermint Tea", "Rooibos Tea (Red Tea)", "Hibiscus Tea", "Lemongrass Tea",
+    ],
+    "Specialty and Regional Teas": [
+      "Darjeeling Tea", "Assam Tea", "Matcha (Japanese Green Tea)", "Sencha (Traditional Japanese Tea)", "Ceylon Tea",
+    ],
+    "Flavored and Blended Teas": [
+      "Earl Grey (Black Tea with Bergamot)", "Masala Chai", "Jasmine Green Tea", "Vanilla Rooibos", "Spiced Apple Tea",
+    ],
+    "Unique and Wellness Teas": [
+      "Genmaicha (Green Tea with Roasted Rice)", "Detox Tea", "Blue Pea Tea (Butterfly Pea Flower)", "Turmeric Tea", "Yerba Mate",
+    ],
+  };
 
   const weights = ["50g", "100g", "250g", "500g", "1kg"];
 
@@ -26,10 +36,25 @@ export default function Add_product() {
       const response = await axios.post('http://localhost:3000/api/products', formData);
 
       alert('Tea packet added successfully!');
-      setFormData({ type: '', price: '', weight: '', introduction: '' });
+      setFormData({
+        mainCategory: '',
+        type: '',
+        price: '',
+        weight: '',
+        introduction: '',
+      });
     } catch (error) {
       console.error('Error adding tea packet:', error);
     }
+  };
+
+  const handleMainCategoryChange = (e) => {
+    const mainCategory = e.target.value;
+    setFormData({
+      ...formData,
+      mainCategory,
+      type: '', // Reset subcategory selection
+    });
   };
 
   return (
@@ -42,19 +67,37 @@ export default function Add_product() {
         className="w-full max-w-md bg-white bg-opacity-90 p-8 rounded-lg shadow-2xl space-y-6 border border-gray-300"
       >
         <label className="block">
-          <span className="text-gray-800 font-semibold">Type of Tea</span>
+          <span className="text-gray-800 font-semibold">Main Category</span>
           <select
             className="form-select mt-2 block w-full rounded-lg border-black bg-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none"
-            value={formData.type}
-            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+            value={formData.mainCategory}
+            onChange={handleMainCategoryChange}
             required
           >
-            <option value="" disabled>Select tea type</option>
-            {teaTypes.map((type, index) => (
-              <option key={index} value={type}>{type}</option>
+            <option value="" disabled>Select main category</option>
+            {Object.keys(teaCategories).map((category, index) => (
+              <option key={index} value={category}>{category}</option>
             ))}
           </select>
         </label>
+
+        {formData.mainCategory && (
+          <label className="block">
+            <span className="text-gray-800 font-semibold">Type of Tea</span>
+            <select
+              className="form-select mt-2 block w-full rounded-lg border-black bg-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              value={formData.type}
+              onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+              required
+            >
+              <option value="" disabled>Select tea type</option>
+              {teaCategories[formData.mainCategory].map((type, index) => (
+                <option key={index} value={type}>{type}</option>
+              ))}
+            </select>
+          </label>
+        )}
+
         <label className="block">
           <span className="text-gray-800 font-semibold">Price (in $)</span>
           <input
