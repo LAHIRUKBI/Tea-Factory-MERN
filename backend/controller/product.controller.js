@@ -31,7 +31,7 @@ export const getProducts = async (req, res) => {
 
 
   // Update product by ID
-export const updateProduct = async (req, res) => {
+  export const updateProduct = async (req, res) => {
     try {
       const { mainCategory, type, price, weight, introduction } = req.body;
       const product = await Product.findByIdAndUpdate(
@@ -46,9 +46,11 @@ export const updateProduct = async (req, res) => {
   
       res.status(200).json({ message: "Product updated successfully", product });
     } catch (error) {
+      console.error("Error updating product:", error);
       res.status(500).json({ message: "Error updating product", error });
     }
   };
+  
   
 
 
