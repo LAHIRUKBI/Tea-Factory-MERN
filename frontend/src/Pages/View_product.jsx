@@ -68,10 +68,7 @@ export default function View_product() {
                 </div>
 
                 <div className="flex justify-between mt-4">
-                  <Link
-                    to={`/updateproduct/${product._id}`}
-                    className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-lg font-semibold shadow-md transition-colors duration-300"
-                  >
+                  <Link to={`/updateproduct/${product._id}`} className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-lg font-semibold shadow-md transition-colors duration-300">
                     Update
                   </Link>
                   <button
