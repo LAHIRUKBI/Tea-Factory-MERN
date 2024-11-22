@@ -16,6 +16,8 @@ import Vehiclemanager_home from './Pages/Vehiclemanager_home'
 import Deliverymanager_home from './Pages/Deliverymanager_home'
 import Add_product from './Pages/Add_product'
 import Add_stocks from './Pages/Add_stocks'
+import View_product from './Pages/View_product'
+import Product_update from './Pages/Product_update'
 
 export default function App() {
   return (
@@ -39,6 +41,8 @@ export default function App() {
       <Route path="/deliverymanagerhome" element={<Deliverymanager_home />} />
       <Route path="/addproduct" element={<Add_product />} />
       <Route path="/addstock" element={<Add_stocks />} />
+      <Route path="/productview" element={<View_product />} />
+      <Route path="/updateproduct" element={<Product_update />} />
 
       
     </Routes>

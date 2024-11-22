@@ -30,6 +30,7 @@ app.use('/api/employees', employeeRouter);
 app.use('/api/products', productRouter);
 
 
+
 // Error handler
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
