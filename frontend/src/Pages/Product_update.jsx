@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function Product_update() {
-  const { id } = useParams();  // Extract product ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     mainCategory: "",
@@ -13,16 +13,16 @@ export default function Product_update() {
     introduction: "",
   });
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true);  // Add loading state for fetching product
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`http://localhost:3000/api/products/${id}`);
-        if (response.data?.product) {
-          setFormData(response.data.product);  // Populate form data with the product details
+        if (response.data.product) {
+          setFormData(response.data.product);
         } else {
-          throw new Error("Product not found");
+          setError("Product not found");
         }
       } catch (error) {
         setError("Error fetching product details");
@@ -31,9 +31,7 @@ export default function Product_update() {
       }
     };
 
-    if (id) {
-      fetchProduct();  // Fetch product details when the component mounts
-    }
+    fetchProduct();
   }, [id]);
 
   const handleChange = (e) => {
@@ -44,32 +42,36 @@ export default function Product_update() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/api/products/${id}`, formData);
-      navigate("/productview");  // Redirect to the product view page after successful update
+      const response = await axios.put(`http://localhost:3000/api/products/${id}`, formData);
+      if (response.status === 200) {
+        navigate("/productview");
+      } else {
+        setError("Failed to update product");
+      }
     } catch (error) {
       setError("Error updating product");
     }
   };
 
   if (loading) {
-    return <div>Loading product data...</div>;  // Show loading message while fetching data
+    return <div>Loading product data...</div>;
   }
 
   return (
     <div className="container mx-auto px-4 py-16">
       <h2 className="text-4xl font-bold text-center text-teal-600 mb-12">Update Product</h2>
-      {error && <p className="text-red-500 text-center">{error}</p>}  {/* Show error if any */}
+      {error && <p className="text-red-500 text-center">{error}</p>}
       <form onSubmit={handleSubmit}>
         {["mainCategory", "type", "price", "weight", "introduction"].map((field) => (
           <div key={field} className="mb-4">
             <label htmlFor={field} className="block text-sm font-semibold text-gray-700">
-              {field.charAt(0).toUpperCase() + field.slice(1)} {/* Capitalize field name */}
+              {field.charAt(0).toUpperCase() + field.slice(1)}
             </label>
             <input
               type={field === "price" || field === "weight" ? "number" : "text"}
               id={field}
               name={field}
-              value={formData[field]}  // Bind form data to the input field
+              value={formData[field]}
               onChange={handleChange}
               className="w-full p-2 border border-gray-300 rounded-lg"
             />
