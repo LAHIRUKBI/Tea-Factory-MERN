@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Add_product() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ export default function Add_product() {
     weight: '',
     introduction: '',
   });
+
+  const navigate = useNavigate();
 
   const teaCategories = {
     "Traditional Tea Types": [
@@ -33,7 +36,7 @@ export default function Add_product() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/products', formData);
+      await axios.post('http://localhost:3000/api/products', formData);
 
       alert('Tea packet added successfully!');
       setFormData({
@@ -43,6 +46,9 @@ export default function Add_product() {
         weight: '',
         introduction: '',
       });
+
+      // Navigate to /productview
+      navigate('/productview');
     } catch (error) {
       console.error('Error adding tea packet:', error);
     }
@@ -58,18 +64,18 @@ export default function Add_product() {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-gray-100 to-white p-6">
-      <h1 className="text-3xl font-extrabold text-gray-800 mb-6 drop-shadow-lg">
+    <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
+      <h1 className="text-3xl font-extrabold text-white mb-6 drop-shadow-lg">
         Add Tea Leaf Packet
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white bg-opacity-90 p-8 rounded-lg shadow-2xl space-y-6 border border-gray-300"
+        className="w-full max-w-md bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-2xl space-y-6 border border-gray-700"
       >
         <label className="block">
-          <span className="text-gray-800 font-semibold">Main Category</span>
+          <span className="text-gray-300 font-semibold">Main Category</span>
           <select
-            className="form-select mt-2 block w-full rounded-lg border-black bg-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="form-select mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             value={formData.mainCategory}
             onChange={handleMainCategoryChange}
             required
@@ -83,9 +89,9 @@ export default function Add_product() {
 
         {formData.mainCategory && (
           <label className="block">
-            <span className="text-gray-800 font-semibold">Type of Tea</span>
+            <span className="text-gray-300 font-semibold">Type of Tea</span>
             <select
-              className="form-select mt-2 block w-full rounded-lg border-black bg-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none"
+              className="form-select mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
               required
@@ -99,19 +105,19 @@ export default function Add_product() {
         )}
 
         <label className="block">
-          <span className="text-gray-800 font-semibold">Price (in $)</span>
+          <span className="text-gray-300 font-semibold">Price (in $)</span>
           <input
             type="number"
-            className="form-input mt-2 block w-full rounded-lg border-black bg-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="form-input mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             value={formData.price}
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
             required
           />
         </label>
         <label className="block">
-          <span className="text-gray-800 font-semibold">Weight</span>
+          <span className="text-gray-300 font-semibold">Weight</span>
           <select
-            className="form-select mt-2 block w-full rounded-lg border-black bg-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="form-select mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             value={formData.weight}
             onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
             required
@@ -123,9 +129,9 @@ export default function Add_product() {
           </select>
         </label>
         <label className="block">
-          <span className="text-gray-800 font-semibold">Introduction</span>
+          <span className="text-gray-300 font-semibold">Introduction</span>
           <textarea
-            className="form-textarea mt-2 block w-full rounded-lg border-black bg-transparent focus:ring-2 focus:ring-blue-400 focus:outline-none"
+            className="form-textarea mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
             rows="3"
             value={formData.introduction}
             onChange={(e) => setFormData({ ...formData, introduction: e.target.value })}
@@ -134,7 +140,7 @@ export default function Add_product() {
         </label>
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:shadow-xl transform hover:scale-105 transition-all"
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:shadow-xl transform hover:scale-105 transition-all"
         >
           Sell Packet
         </button>
