@@ -47,7 +47,6 @@ export default function Add_product() {
         introduction: '',
       });
 
-      // Navigate to /productview
       navigate('/productview');
     } catch (error) {
       console.error('Error adding tea packet:', error);
@@ -59,23 +58,27 @@ export default function Add_product() {
     setFormData({
       ...formData,
       mainCategory,
-      type: '', // Reset subcategory selection
+      type: '',
     });
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
-      <h1 className="text-3xl font-extrabold text-white mb-6 drop-shadow-lg">
-        Add Tea Leaf Packet
+    <div className="flex flex-col items-center min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-black p-6">
+      <h1 className="text-4xl font-extrabold text-yellow-400 mb-6 drop-shadow-lg">
+        Add Your Unique Tea Packet
       </h1>
+      <p className="text-lg text-gray-200 text-center mb-6 max-w-3xl">
+        Welcome to the tea inventory management page. Use this form to add exquisite tea packets to our catalog. 
+        Provide all the necessary details to ensure your product stands out.
+      </p>
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-gray-800 bg-opacity-90 p-8 rounded-lg shadow-2xl space-y-6 border border-gray-700"
+        className="w-full max-w-lg bg-gradient-to-br from-gray-800 to-gray-700 p-8 rounded-xl shadow-2xl space-y-6 border border-gray-600"
       >
         <label className="block">
-          <span className="text-gray-300 font-semibold">Main Category</span>
+          <span className="text-yellow-300 font-semibold">Main Category</span>
           <select
-            className="form-select mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="form-select mt-2 block w-full rounded-lg border-gray-600 bg-gray-600 text-gray-300 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
             value={formData.mainCategory}
             onChange={handleMainCategoryChange}
             required
@@ -89,9 +92,9 @@ export default function Add_product() {
 
         {formData.mainCategory && (
           <label className="block">
-            <span className="text-gray-300 font-semibold">Type of Tea</span>
+            <span className="text-yellow-300 font-semibold">Type of Tea</span>
             <select
-              className="form-select mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              className="form-select mt-2 block w-full rounded-lg border-gray-600 bg-gray-600 text-gray-300 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value })}
               required
@@ -105,19 +108,20 @@ export default function Add_product() {
         )}
 
         <label className="block">
-          <span className="text-gray-300 font-semibold">Price (in $)</span>
+          <span className="text-yellow-300 font-semibold">Price (in $)</span>
           <input
             type="number"
-            className="form-input mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="form-input mt-2 block w-full rounded-lg border-gray-600 bg-gray-600 text-gray-300 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
             value={formData.price}
             onChange={(e) => setFormData({ ...formData, price: e.target.value })}
             required
           />
         </label>
+
         <label className="block">
-          <span className="text-gray-300 font-semibold">Weight</span>
+          <span className="text-yellow-300 font-semibold">Weight</span>
           <select
-            className="form-select mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="form-select mt-2 block w-full rounded-lg border-gray-600 bg-gray-600 text-gray-300 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
             value={formData.weight}
             onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
             required
@@ -128,21 +132,24 @@ export default function Add_product() {
             ))}
           </select>
         </label>
+
         <label className="block">
-          <span className="text-gray-300 font-semibold">Introduction</span>
+          <span className="text-yellow-300 font-semibold">Introduction</span>
           <textarea
-            className="form-textarea mt-2 block w-full rounded-lg border-gray-700 bg-gray-700 text-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="form-textarea mt-2 block w-full rounded-lg border-gray-600 bg-gray-600 text-gray-300 focus:ring-2 focus:ring-yellow-500 focus:outline-none"
             rows="3"
+            placeholder="Write an appealing introduction for your tea packet."
             value={formData.introduction}
             onChange={(e) => setFormData({ ...formData, introduction: e.target.value })}
             required
           ></textarea>
         </label>
+
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:shadow-xl transform hover:scale-105 transition-all"
+          className="w-full bg-gradient-to-r from-yellow-600 to-yellow-500 text-black py-3 rounded-lg font-semibold text-lg shadow-md hover:shadow-xl transform hover:scale-105 transition-all"
         >
-          Sell Packet
+          Add to Catalog
         </button>
       </form>
     </div>
